@@ -26,4 +26,38 @@ For the A Data Analyst, the most important skills that must be under his belt ar
 With that been said, let’s talk about my idea.
 
 ## **The Project Idea**
+
 For this project I decided to build a `Job Analyser` website tool that helps people to know more about several job roles nad make the right decision for there future dream job.
+
+After saying that, there are some key tasks that should be done, which are:
+
+### A. **Colecting The Data**
+
+For collecting data needed for this project, I’ll go with building a web scraper for job search websites to scrape the job posts information.
+
+#### Web Scraper
+
+There is a lot of Choices when it come to the web scraping frameworks/libraries, but I'm gonna use to methods:
+
+- API requests
+- BeautifulSoup
+
+#### Target wesites (Data Source)
+
+There a lot of option here to consider but I want to take the most detailed, and not very hard to scrape website. Some of the options are:
+
+- Monster:
+- Job Bank:
+- Indeed:
+- SimplyHired:
+- ZipRecruiter:
+- GLASSDOOR:
+- Career on stop
+
+#### Requirements
+
+- Python
+- jupyter Notebook (For interactive programing)
+- request library
+- beautifulsoup library (not sure yet)
+- Scrapy framework (not sure yet)
