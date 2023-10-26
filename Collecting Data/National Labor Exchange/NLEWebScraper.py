@@ -32,10 +32,66 @@ def main():
     'num_items': '15', 
 }
     offset, positions, pages = get_website_structure(url, headers=headers, params=params)
-    print(offset)
-    print(positions)
-    print(pages)
-    
+    for page in range(1,positions/5000):
+        params = {
+        'page': str(page),
+        'offset': 5000, # after some tries, I found the maximum is 10000
+        'num_items': 5000, 
+        }
+        while True:
+            try:
+                response = requests.get(url=url, headers=headers, params=params)
+                if response.status_code != 200:
+                    print('request failed')
+                    continue
+                break
+            except:
+                continue
+        
+        data = response.json()
+        for job in data['jobs']:
+            GeoLocation = job['GeoLocation']
+            _version_ = job['_version_']
+            all_locations = job['all_locations']
+            buid = job['buid']
+            city_exact = job['city_exact']
+            city_slab_exact = job['city_slab_exact']
+            company_buid_slab = job['company_buid_slab']
+            company_buid_slab_exact = job['company_buid_slab_exact']
+            company_exact = job['company_exact']
+            company_member = job['company_member']
+            company_slab_exact = job['company_slab_exact']
+            country_ac = job['country_ac']
+            country_exact = job['country_exact']
+            country_short_exact = job['country_short_exact']
+            country_slab_exact = job['country_slab_exact']
+            date_added = job['date_added']
+            date_new = job['date_new']
+            date_updated = job['date_updated']
+            description = job['description']
+            django_ct = job['django_ct']
+            django_id = job['django_id']
+            federal_contractor = job['federal_contractor']
+            guid = job['guid']
+            id = job['id']
+            is_posted = job['is_posted']
+            lat_long_buid_slab_exact = job['lat_long_buid_slab_exact']
+            location_exact = job['location_exact']
+            network = job['network']
+            on_sites = job['on_sites']
+            onet_exact = job['onet_exact']
+            other = job['other']
+            reqid = job['reqid']
+            salted_date = job['salted_date']
+            score = job['score']
+            state_short = job['state_short']
+            state_short_exact = job['state_short_exact']
+            title_exact = job['title_exact']
+            title_slab_exact = job['title_slab_exact']
+            title_slug = job['title_slug']
+
+
+
 def staticUserAgentRotator():
         user_agents = [
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36 Edg/118.0.2088.46",
