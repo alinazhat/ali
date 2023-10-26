@@ -50,46 +50,211 @@ def main():
         
         data = response.json()
         for job in data['jobs']:
-            GeoLocation = job['GeoLocation']
-            _version_ = job['_version_']
-            all_locations = job['all_locations']
-            buid = job['buid']
-            city_exact = job['city_exact']
-            city_slab_exact = job['city_slab_exact']
-            company_buid_slab = job['company_buid_slab']
-            company_buid_slab_exact = job['company_buid_slab_exact']
-            company_exact = job['company_exact']
-            company_member = job['company_member']
-            company_slab_exact = job['company_slab_exact']
-            country_ac = job['country_ac']
-            country_exact = job['country_exact']
-            country_short_exact = job['country_short_exact']
-            country_slab_exact = job['country_slab_exact']
-            date_added = job['date_added']
-            date_new = job['date_new']
-            date_updated = job['date_updated']
-            description = job['description']
-            django_ct = job['django_ct']
-            django_id = job['django_id']
-            federal_contractor = job['federal_contractor']
-            guid = job['guid']
-            id = job['id']
-            is_posted = job['is_posted']
-            lat_long_buid_slab_exact = job['lat_long_buid_slab_exact']
-            location_exact = job['location_exact']
-            network = job['network']
-            on_sites = job['on_sites']
-            onet_exact = job['onet_exact']
-            other = job['other']
-            reqid = job['reqid']
-            salted_date = job['salted_date']
-            score = job['score']
-            state_short = job['state_short']
-            state_short_exact = job['state_short_exact']
-            title_exact = job['title_exact']
-            title_slab_exact = job['title_slab_exact']
-            title_slug = job['title_slug']
+            try:
+                GeoLocation = job['GeoLocation']
+            except:
+                GeoLocation = 'None'
 
+            try:
+                _version_ = job['_version_']
+            except:
+                _version_ = 'None'
+
+            try:
+                all_locations = job['all_locations']
+            except:
+                all_locations = 'None'
+
+            try:
+                buid = job['buid']
+            except:
+                buid = 'None'
+
+            try:
+                city_exact = job['city_exact']
+            except:
+                city_exact = 'None'
+
+            try:
+                city_slab_exact = job['city_slab_exact']
+            except:
+                city_slab_exact = 'None'
+
+            try:
+                company_buid_slab = job['company_buid_slab']
+            except:
+                company_buid_slab = 'None'
+
+            try:
+                company_buid_slab_exact = job['company_buid_slab_exact']
+            except:
+                company_buid_slab_exact = 'None'
+
+            try:
+                company_exact = job['company_exact']
+            except:
+                company_exact = 'None'
+
+            try:
+                company_member = job['company_member']
+            except:
+                company_member = 'None'
+
+            try:
+                company_slab_exact = job['company_slab_exact']
+            except:
+                company_slab_exact = 'None'
+
+            try:
+                country_ac = job['country_ac']
+            except:
+                country_ac = 'None'
+
+            try:
+                country_exact = job['country_exact']
+            except:
+                country_exact = 'None'
+
+            try:
+                country_short_exact = job['country_short_exact']
+            except:
+                country_short_exact = 'None'
+
+            try:
+                country_slab_exact = job['country_slab_exact']
+            except:
+                country_slab_exact = 'None'
+
+            try:
+                date_added = job['date_added']
+            except:
+                date_added = 'None'
+
+            try:
+                date_new = job['date_new']
+            except:
+                date_new = 'None'
+
+            try:
+                date_updated = job['date_updated']
+            except:
+                date_updated = 'None'
+
+            try:
+                description = job['description']
+            except:
+                description = 'None'
+
+            try:
+                django_ct = job['django_ct']
+            except:
+                django_ct = 'None'
+
+            try:
+                django_id = job['django_id']
+            except:
+                django_id = 'None'
+
+            try:
+                federal_contractor = job['federal_contractor']
+            except:
+                federal_contractor = 'None'
+
+            try:
+                guid = job['guid']
+            except:
+                guid = 'None'
+
+            try:
+                id = job['id']
+            except:
+                id = 'None'
+
+            try:
+                is_posted = job['is_posted']
+            except:
+                is_posted = 'None'
+
+            try:
+                lat_long_buid_slab_exact = job['lat_long_buid_slab_exact']
+            except:
+                lat_long_buid_slab_exact = 'None'
+
+            try:
+                location_exact = job['location_exact']
+            except:
+                location_exact = 'None'
+
+            try:
+                network = job['network']
+            except:
+                network = 'None'
+
+            try:
+                on_sites = job['on_sites']
+            except:
+                on_sites = 'None'
+
+            try:
+                onet_exact = job['onet_exact']
+            except:
+                onet_exact = 'None'
+
+            try:
+                other = job['other']
+            except:
+                other = 'None'
+
+            try:
+                reqid = job['reqid']
+            except:
+                reqid = 'None'
+
+            try:
+                salted_date = job['salted_date']
+            except:
+                salted_date = 'None'
+
+            try:
+                score = job['score']
+            except:
+                score = 'None'
+
+            try:
+                state_short = job['state_short']
+            except:
+                state_short = 'None'
+
+            try:
+                state_short_exact = job['state_short_exact']
+            except:
+                state_short_exact = 'None'
+
+            try:
+                title_exact = job['title_exact']
+            except:
+                title_exact = 'None'
+
+            try:
+                title_slab_exact = job['title_slab_exact']
+            except:
+                title_slab_exact = 'None'
+
+            try:
+                title_slug = job['title_slug']
+            except:
+                title_slug = 'None'
+
+            
+            if os.path.exists('NLEJobs.csv'):
+                with open('NLEJobs.csv', 'a', newline='', encoding='utf-8') as csvfile:
+                    writer = csv.writer(csvfile)
+                    writer.writerow([GeoLocation, _version_, all_locations, buid, city_exact, city_slab_exact, company_buid_slab, company_buid_slab_exact, company_exact, company_member, company_slab_exact, country_ac, country_exact, country_short_exact, country_slab_exact, date_added, date_new, date_updated, description, django_ct, django_id, federal_contractor, guid, id, is_posted, lat_long_buid_slab_exact, location_exact, network, on_sites, onet_exact, other, reqid, salted_date, score, state_short, state_short_exact, title_exact, title_slab_exact, title_slug])
+            else:
+                with open('NLEJobs.csv', 'w', newline='', encoding='utf-8') as csvfile:
+                    writer = csv.writer(csvfile)
+                    writer.writerow(['GeoLocation', '_version_', 'all_locations', 'buid', 'city_exact', 'city_slab_exact', 'company_buid_slab', 'company_buid_slab_exact', 'company_exact', 'company_member', 'company_slab_exact', 'country_ac', 'country_exact', 'country_short_exact', 'country_slab_exact', 'date_added', 'date_new', 'date_updated', 'description', 'django_ct', 'django_id', 'federal_contractor', 'guid', 'id', 'is_posted', 'lat_long_buid_slab_exact', 'location_exact', 'network', 'on_sites', 'onet_exact', 'other', 'reqid', 'salted_date', 'score', 'state_short', 'state_short_exact', 'title_exact', 'title_slab_exact', 'title_slug'])
+                    writer.writerow([GeoLocation, _version_, all_locations, buid, city_exact, city_slab_exact, company_buid_slab, company_buid_slab_exact, company_exact, company_member, company_slab_exact, country_ac, country_exact, country_short_exact, country_slab_exact, date_added, date_new, date_updated, description, django_ct, django_id, federal_contractor, guid, id, is_posted, lat_long_buid_slab_exact, location_exact, network, on_sites, onet_exact, other, reqid, salted_date, score, state_short, state_short_exact, title_exact, title_slab_exact, title_slug])
 
 
 def staticUserAgentRotator():
