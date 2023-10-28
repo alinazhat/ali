@@ -31,7 +31,82 @@ def main():
                 print("    Page request failled")
                 headers = staticHeadersRotator() # Change the request headers 
                 continue # And Loob again
-    
+
+        for n, datum in enumerate(mainData, 1): # Loop trough every job post in the current page
+                print(f"    Job: {n}")
+                while True: # Keep looping
+                    try: # Try to request a job
+                        subResponce = requests.get(f'https://www.dice.com{datum["href"]}', headers=headers)
+                        subSoup = BeautifulSoup(subResponce.text, 'lxml')
+                        print("         Job request succeed")
+                        break # Untill the request succeed
+                    except: # Otherwese
+                        headers = staticHeadersRotator() # Change the request headers
+                        print("         Job request failled")
+                        continue # And Loop Again
+
+                id = str((i-1)*20 + n)
+                # Try to get the job information, return None values otherwise    
+                try:
+                    title = subSoup.find('h1', {"data-cy":"jobTitle"}).text
+                except:
+                    title = None
+                    
+                try:
+                    skills = [skill.text for skill in subSoup.find('ul', {"data-cy":"skillsList"})]
+                except:
+                    skills = []
+                
+                try:
+                    companyName = subSoup.find('a', {"data-cy":"companyNameLink"}).text
+                except:
+                    companyName = None
+                    
+                try:
+                    employmentType = subSoup.find('p', {"data-cy":"employmentType"}).text
+                except:
+                    employmentType = None
+                    
+                try:
+                    salary = subSoup.find('p', {"data-cy":"compensationText"}).get_text()
+                except:
+                    salary = None
+                    
+                try:
+                    remote = subSoup.find('p', {"data-cy":"workFromHome"}).text
+                except:
+                    remote = None
+                    
+                try:
+                    companyLocation = subSoup.find('li', {"data-cy":"companyLocation", "data-testid":"companyLocation"}).text
+                except:
+                    companyLocation = None
+                    
+                try:
+                    description = subSoup.find('div', {"data-testid":"jobDescriptionHtml"}).text
+                except:
+                    description = None
+                    
+                try:
+                    postedDate = subSoup.find('dhi-time-ago')['posted-date']
+                except:
+                    postedDate = None
+                    
+                try:
+                    updatedDate = subSoup.find('dhi-time-ago')['modified-date']
+                except:
+                    updatedDate = None
+                    
+                try:
+                    positionId = subSoup.find('li', {"data-testid":"legalInfo-referenceCode"}).text.split(' ')[-1]
+                except:
+                    positionId = None
+                    
+                try:
+                    companyId = subSoup.find('li', {"data-testid":"legalInfo-companyName"}).text.split(' ')[-1]
+                except:
+                    companyId = None
+                print("         Seccess scraping")    
 
 def get_website_structure(url, headers):
     '''This function purpose is to get the sturcture of the page, it returns:
