@@ -17,6 +17,20 @@ def main():
     print('offset:', offset)
     print('positions:', positions)
     print('pages:', pages)
+    for i, page in enumerate(range(pages),1): # Loob through every page
+        print(f'Page: {i}')
+        print(f'    {offset*(i-1)} jobs data collected so far.')
+        while True: # Keep looping
+            try: # Try to reqeust a page
+                mainReponce = requests.get(f"https://www.dice.com/jobs/q--jobs?p={str(page+1)}", headers=headers)
+                mainSoup = BeautifulSoup(mainReponce.text, 'lxml')
+                mainData = mainSoup.find_all('a', class_="dice-btn-link loggedInVisited easy-apply")
+                print("    Page request Succeed ")
+                break # Until the the requeset secceed
+            except: # Otherwise 
+                print("    Page request failled")
+                headers = staticHeadersRotator() # Change the request headers 
+                continue # And Loob again
     
 
 def get_website_structure(url, headers):
