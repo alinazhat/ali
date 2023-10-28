@@ -106,7 +106,19 @@ def main():
                     companyId = subSoup.find('li', {"data-testid":"legalInfo-companyName"}).text.split(' ')[-1]
                 except:
                     companyId = None
-                print("         Seccess scraping")    
+                print("         Seccess scraping")
+                save_job_info(id,          # Send the scraped data into the save function
+                              title, 
+                              skills, 
+                              employmentType, 
+                              salary, remote, 
+                              companyName, 
+                              companyLocation, 
+                              description, 
+                              postedDate, 
+                              updatedDate, 
+                              companyId, 
+                              positionId)                    
 
 def get_website_structure(url, headers):
     '''This function purpose is to get the sturcture of the page, it returns:
@@ -133,6 +145,34 @@ def get_website_structure(url, headers):
     allPositions = int(data.text.replace(',',''))
     allPages = int(allPositions/offset+1)
     return (offset, allPositions, allPages)
+
+def save_job_info(id, title, skills, employmentType, salary, remote, companyName, companyLocation, description, postedDate, updatedDate, companyId, positionId):
+    """Saves job data to a CSV file.
+
+    Args:
+        id: job index
+        title: The job title.
+        skills: A list of the job skills.
+        employmentType: The employment type (e.g., full-time, part-time, contract).
+        salary: The salary (optional).
+        remote: Whether the job is remote (optional).
+        companyName: The company name.
+        companyLocation: The company location.
+        description: The job description.
+        postedDate: The job posted date.
+        updatedDate: The job updated date.
+        companyId: The company ID.
+        positionId: The position ID.
+    """
+    if os.path.exists('jobs.csv'): # If the csv file excists
+        with open('jobs.csv', 'a', newline='', encoding='utf-8') as csvfile: # append data
+            writer = csv.writer(csvfile)
+            writer.writerow([id, title, ','.join(skills), employmentType, salary, remote, companyName, companyLocation, description, postedDate, updatedDate, companyId, positionId])
+    else: # If not
+        with open('jobs.csv', 'w', newline='', encoding='utf-8') as csvfile: # Create one and write the column name
+            writer = csv.writer(csvfile)
+            writer.writerow(['id', 'title', 'skills', 'employment_type', 'salary', 'remote', 'company_name', 'company_location', 'description', 'posted_date', 'updated_date', 'company_id', 'position_id'])
+            writer.writerow([id, title, ','.join(skills), employmentType, salary, remote, companyName, companyLocation, description, postedDate, updatedDate, companyId, positionId])
 
 def staticUserAgentRotator():
         user_agents = [
