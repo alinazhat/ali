@@ -17,14 +17,18 @@ def main():
     print('offset:', offset)
     print('positions:', positions)
     print('pages:', pages)
+    jobs = 0
     for i, page in enumerate(range(pages),1): # Loob through every page
         print(f'Page: {i}')
-        print(f'    {offset*(i-1)} jobs data collected so far.')
+        print(f'    {jobs} jobs collected so far.')
         while True: # Keep looping
             try: # Try to reqeust a page
                 mainReponce = requests.get(f"https://www.dice.com/jobs/q--jobs?p={str(page+1)}", headers=headers)
                 mainSoup = BeautifulSoup(mainReponce.text, 'lxml')
                 mainData = mainSoup.find_all('a', class_="dice-btn-link loggedInVisited easy-apply")
+                if len(mainData) == 0:
+                    print('Bad response')
+                    headers = staticHeadersRotator()
                 print("    Page request Succeed ")
                 break # Until the the requeset secceed
             except: # Otherwise 
@@ -34,6 +38,7 @@ def main():
 
         for n, datum in enumerate(mainData, 1): # Loop trough every job post in the current page
                 print(f"    Job: {n}")
+                jobs+=len(mainData)
                 while True: # Keep looping
                     try: # Try to request a job
                         subResponce = requests.get(f'https://www.dice.com{datum["href"]}', headers=headers)
@@ -164,12 +169,12 @@ def save_job_info(id, title, skills, employmentType, salary, remote, companyName
         companyId: The company ID.
         positionId: The position ID.
     """
-    if os.path.exists('jobs.csv'): # If the csv file excists
-        with open('jobs.csv', 'a', newline='', encoding='utf-8') as csvfile: # append data
+    if os.path.exists('DiceJobs.csv'): # If the csv file excists
+        with open('DiceJobs.csv', 'a', newline='', encoding='utf-8') as csvfile: # append data
             writer = csv.writer(csvfile)
             writer.writerow([id, title, ','.join(skills), employmentType, salary, remote, companyName, companyLocation, description, postedDate, updatedDate, companyId, positionId])
     else: # If not
-        with open('jobs.csv', 'w', newline='', encoding='utf-8') as csvfile: # Create one and write the column name
+        with open('DiceJobs.csv', 'w', newline='', encoding='utf-8') as csvfile: # Create one and write the column name
             writer = csv.writer(csvfile)
             writer.writerow(['id', 'title', 'skills', 'employment_type', 'salary', 'remote', 'company_name', 'company_location', 'description', 'posted_date', 'updated_date', 'company_id', 'position_id'])
             writer.writerow([id, title, ','.join(skills), employmentType, salary, remote, companyName, companyLocation, description, postedDate, updatedDate, companyId, positionId])
